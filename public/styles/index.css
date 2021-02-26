@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body{
+    background-color: rgb(105, 78, 122);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.App{
+    min-width: 90vw;
+    max-height: 90vh;
+    min-height: 70vh;
+    background-color: rgb(21, 33, 50);
+    color: rgb(243, 243, 243);
+}
+
+.search-form-container{
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkboxes li{
+    list-style: none;
+}
+
+.booklist{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-width: 100%;
+}
+
+.search-input-container{
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -1,0 +1,11 @@
+type Book @model {
+  id: ID!
+  bookTitle: String!
+  bookShortName: String!
+  bookContentID: String!
+}
+
+type BookContent @model {
+  id: ID!
+  bookContent: String!
+}

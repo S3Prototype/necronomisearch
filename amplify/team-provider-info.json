@@ -1,0 +1,15 @@
+{
+  "work": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-necronomisearch-work-144654-authRole",
+      "UnauthRoleArn": "arn:aws:iam::474939783196:role/amplify-necronomisearch-work-144654-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::474939783196:role/amplify-necronomisearch-work-144654-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-necronomisearch-work-144654-deployment",
+      "UnauthRoleName": "amplify-necronomisearch-work-144654-unauthRole",
+      "StackName": "amplify-necronomisearch-work-144654",
+      "StackId": "arn:aws:cloudformation:us-east-1:474939783196:stack/amplify-necronomisearch-work-144654/35afe7e0-77a2-11eb-9284-12717722e021",
+      "AmplifyAppId": "d2k1h2m6e7ggew"
+    }
+  }
+}

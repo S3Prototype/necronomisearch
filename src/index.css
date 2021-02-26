@@ -1,13 +1,179 @@
-body {
+*{
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+@font-face {
+  font-family: 'Astaroth';
+  src: url('./fonts/astaroth/astaroth.eot'); /* IE9 Compat Modes */
+  src: url('./fonts/astaroth/astaroth.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/astaroth/astaroth.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/astaroth/astaroth.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./fonts/astaroth/astaroth.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./fonts/astaroth/astaroth.svg#svgFontName') format('svg'); /* Legacy iOS */
+
+}
+
+@font-face {
+  font-family: 'Backslash';
+  src: url('./fonts/backslash/Backslash.eot'); /* IE9 Compat Modes */
+  src: url('./fonts/backslash/Backslash.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/backslash/Backslash.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/backslash/Backslash.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./fonts/backslash/Backslash.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./fonts/backslash/Backslash.svg#svgFontName') format('svg'); /* Legacy iOS */
+
+}
+
+:root{
+  --base-text-size: 18px;
+  --placeholder-text-size: 28px;
+  --contact-info-text-size: 22px;
+}
+
+
+html { 
+  background: url('https://res.cloudinary.com/diujqlncs/image/upload/v1614124762/cthulhu_jchsmb.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgb(105, 78, 122); */
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+.App{
+  min-width: 90%;
+  max-width: 90%;
+  /* max-height: 90%; */
+  min-height: 80%;
+  max-height: 80%;
+  /* background-color: rgba(191, 80, 90, 0.5); */
+  
+  color: rgb(243, 243, 243);
+  font-size: var(--base-text-size);
+  font-family: 'Backslash', 'Times New Roman', Times, serif;
+
+  background: url('https://res.cloudinary.com/diujqlncs/image/upload/v1614125446/cthulhu_orange_ldvi1b.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.title{
+  margin: 20px;
+  font-family: 'Astaroth', Georgia, 'Times New Roman', Times, serif;
+  letter-spacing: 2px;
+  font-size: 50px;
+}
+
+.description{
+  margin: 10px;
+}
+
+.contact-info{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Astaroth', Georgia, 'Times New Roman', Times, serif;
+  font-size: var(--contact-info-text-size);
+}
+
+label{
+  margin-left: 10px;
+}
+
+.search-form-container{
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* background-color: rosybrown; */
+}
+
+.books{
+  min-width: 100%;
+  max-height: 40%;
+  /* background-color: red; */
+  overflow-y: scroll;
+}
+
+.booklist{
+  min-width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  /* background-color: royalblue; */
+}
+
+.booklist li{
+  margin: 10px;
+}
+
+.search-input-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 80%;
+  max-width: 80%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.search{
+  border: none;
+  background: none;
+  font-size: var(--placeholder-text-size);
+  max-width: 60%;
+  border-bottom: 1px solid white;
+}
+
+.search::placeholder{
+  font-family: 'Astaroth', Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.search-button{
+  border: 1px white;
+  border-style: solid;
+  background: none;
+  color: white;
+  font-size: var(--base-text-size);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Astaroth', Georgia, 'Times New Roman', Times, serif;
+}
+
+@media (min-width: 1100px){
+  .booklist{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .books{
+    overflow: hidden;
+  }
 }

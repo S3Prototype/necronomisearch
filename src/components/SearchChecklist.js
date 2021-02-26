@@ -1,32 +1,77 @@
 import React from 'react'
+import '../index.css';
+import Amplify, {API, graphqlOperation} from 'aws-amplify';
+import awsconfig from '../aws-exports';
+// import {AmplifySignOut, withAuthetnicator} from '../aws-amplify/ui-react';
+import {listBooks} from '../graphql/queries';
+import {useState, useEffect, useRef} from 'react';
 
-const SearchChecklist = () => {
+Amplify.configure(awsconfig);
+
+const SearchChecklist = (props) => {
+    const [books, setBooks] = useState([]);
+
+    useEffect(()=>{
+        fetchBooks();
+    }, []);
+
+    const fetchBooks = async ()=>{
+        try{
+            const bookData = await API.graphql(graphqlOperation(listBooks));
+            const bookList = bookData.data.listBooks.items;
+            console.log("Book list: ", bookList);
+            setBooks(bookList);
+        } catch(error){
+            console.log("Error fetching books from gql api!", error);
+        }
+    }
+
+    // function addToChosenBooks()
+
+    const inputRef = useRef(null)
+    function testFunc(){
+        props.toggleBook(inputRef.current.value);
+        console.log(inputRef.current.name);
+    }
+
     return (
-        <div className="checkboxes">
-            <ul>
-                <li>
-                    <input type="checkbox" value="The Call of Cthulhu" name="cthulhu" />
+        <div className="books">
+            <ul className="booklist">
+                {books.map(book=>{
+                    return <li>
+                        <input className="bookCheckBox" onClick={()=>props.toggleChosenBooks(book.bookContentID)} ref={inputRef} className="checkbox" type="checkbox" value={book.bookContentID} name={book.bookShortName} />                        
+                        <label for={book.bookShortName}>{book.bookTitle}</label>
+                    </li>
+                })}
+                {   
+                    document.querySelectorAll('input.bookCheckBox')
+                    .forEach(checkbox=>checkbox.checked = false)
+                }
+
+
+                {/* <li>
+                    <input className="checkbox" type="checkbox" value="The Call of Cthulhu" name="cthulhu" />
                     <label for="cthulhu">The Call of Cthulhu</label>
                 </li>
                 <li>
-                    <input type="checkbox" value="The Whisperer in Darkness" name="whisperer" />
+                    <input className="checkbox" type="checkbox" value="The Whisperer in Darkness" name="whisperer" />
                     <label for="whisperer">The Whisperer in Darkness</label>
                 </li>
                 
                 <li>
-                    <input type="checkbox" value="The Dunwich Horror"></input>
+                    <input className="checkbox" type="checkbox" value="The Dunwich Horror"></input>
                     <label for="dunwich">The Dunwich Horror</label>
                 </li>
                 
                 <li>
-                    <input type="checkbox" value="At the Mountains of Madness"></input>
+                    <input className="checkbox"type="checkbox" value="At the Mountains of Madness"></input>
                     <label for="mountains">At the Mountains of Madness</label>
                 </li>
                 
                 <li>
-                    <input type="checkbox" value="The Shadow Over Innsmouth"></input>
+                    <input className="checkbox" type="checkbox" value="The Shadow Over Innsmouth"></input>
                     <label for="innsmouth">The Shadow Over Innsmouth</label>
-                </li>
+                </li> */}
             </ul>
         </div>
     )

@@ -1,13 +1,30 @@
+DOING:
+* Use backend and api to test out search
+
+=====
 
 TODO:
-* Style the page in css
-    * mobile-first
-* Write backend to automatically generate the checklist of options based on db tables available (use dummy object for that initially)
-* Use test backend and api to test out search
 * Style search results.
 * Research AWS amplify.
 * Decide how you will split up the texts and make them searchable (try to optimize for speed and least resources)
 * Use code to break text up and save it to database
 * Implement search
 * Save searches to redis cache for fast recovery.
+* Save previous 3 searches on the client. No need to ping server if it's been searched already. This is not data that will likely update.
+* Use a linter to clean up code.
 * If you have time, make it an accessible API that anyone can hit, and create an NPM package.
+
+
+DONE:
+
+===
+2/25/21
+
+* Write backend to automatically generate the checklist of options based on db tables available (use dummy object for that initially)
+
+
+===
+2/23/21
+
+* Style the page in css
+    * mobile-first
