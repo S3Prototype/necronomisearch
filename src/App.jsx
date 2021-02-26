@@ -1,7 +1,19 @@
 import './index.css';
 import Searchform from './components/Searchform';
+import SearchResults from './components/SearchResults';
+import {useState, useEffect} from 'react';
+import {getSearchResults} from './utils/GetSearchResults';
 
 function App() {
+
+  const [showResults, setShowResults] = useState(false);
+  let bookSearchResults = [];
+
+  const toggleShowResults = ()=>setShowResults(!showResults);
+
+  // ! TODO 2/26/21:
+  // Need to implement use effect to query db whenever search button pressed.
+  // First just get the text from the db as proof it works.
 
   //Put code here to toggle search results window.
   //pass the usestate function down to searchform
@@ -12,8 +24,11 @@ function App() {
   // * That use state stuff will be called after search results are gotten.
 
   return (
-    <div className="App">
-      <Searchform />
+    <div className="App ui-container">
+      {showResults ?
+        <SearchResults setShowResults={setShowResults} results={bookSearchResults}/> :
+        <Searchform toggleShowResults={toggleShowResults} />
+      }
     </div>
   );
 }

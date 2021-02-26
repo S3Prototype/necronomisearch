@@ -5,7 +5,6 @@ DOING:
 
 TODO:
 * Style search results.
-* Research AWS amplify.
 * Decide how you will split up the texts and make them searchable (try to optimize for speed and least resources)
 * Use code to break text up and save it to database
 * Implement search
@@ -19,7 +18,7 @@ DONE:
 
 ===
 2/25/21
-
+* Research AWS amplify.
 * Write backend to automatically generate the checklist of options based on db tables available (use dummy object for that initially)
 
 
