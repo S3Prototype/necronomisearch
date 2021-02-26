@@ -4,12 +4,12 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 
 
-const SearchInput = ({toggleShowResults}) => {
+const SearchInput = (props) => {
     return (
         <div className="search-input-container">
             <FontAwesomeIcon icon={faSearch} />
             <input className="search" type="text" placeholder="Search Here"/>
-            <button className="search-button" onClick={toggleShowResults}>Search</button>
+            <button className="search-button" onClick={props.submitSearch}>Search</button>
         </div>
     )
 }

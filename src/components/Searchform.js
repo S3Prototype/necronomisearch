@@ -2,7 +2,7 @@ import React from 'react'
 import SearchInput from './SearchInput'
 import SearchChecklist from './SearchChecklist'
 import {useState, useEffect} from 'react'
-const Searchform = ({toggleShowResults}) => {
+const Searchform = (props) => {
 
     const [chosenBooks, setChosenBooks] = useState([]);
 
@@ -23,6 +23,10 @@ const Searchform = ({toggleShowResults}) => {
     //     getSearchResults(chosenBooks);
     // }
 
+    const submitSearch = ()=>{
+        props.searchForBooks(chosenBooks);
+    }
+
     //Create a function here that toggles if a value is in an array
     //Pass that function down to seachchecklist
     //Have an onclick for the whole li. When it's clicked, trigger this toggle
@@ -31,7 +35,7 @@ const Searchform = ({toggleShowResults}) => {
         <main className="search-form-container">
             <h1 className="title">NecronomiSearch</h1>
             <p className="description">Search through all H.P. Lovecraft books.</p>                        
-            <SearchInput toggleShowResults={toggleShowResults}/>
+            <SearchInput submitSearch={submitSearch}/>
             <SearchChecklist toggleChosenBooks={toggleChosenBooks} />
             <div className="contact-info">
                 <p>Made by <a href="https://twitter.com/shaquilhansford" target="blank">@shaquilhansford</a></p>

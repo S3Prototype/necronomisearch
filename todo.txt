@@ -1,9 +1,15 @@
 DOING:
-* Use backend and api to test out search
 
 =====
 
+https://www.gillmeister-software.com/online-tools/text/remove-line-breaks.aspx
+
+https://www.textfixer.com/tools/add-line-breaks.php
+
 TODO:
+* Then find the searched-for text, and return it and +-300 characters around it
+* Put those into individiual boxes, which when you click on them, they fill the screen.
+* Put a "Back" button in these boxes for backing out.
 * Style search results.
 * Decide how you will split up the texts and make them searchable (try to optimize for speed and least resources)
 * Use code to break text up and save it to database
@@ -15,6 +21,12 @@ TODO:
 
 
 DONE:
+
+===
+2/26/21
+
+* Use backend and api to test out search
+* Just get the raw entire novel first and show it, just to prove it works.
 
 ===
 2/25/21

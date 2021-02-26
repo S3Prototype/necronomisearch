@@ -41,6 +41,8 @@ export const onCreateBookContent = /* GraphQL */ `
   subscription OnCreateBookContent {
     onCreateBookContent {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt
@@ -51,6 +53,8 @@ export const onUpdateBookContent = /* GraphQL */ `
   subscription OnUpdateBookContent {
     onUpdateBookContent {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt
@@ -61,6 +65,8 @@ export const onDeleteBookContent = /* GraphQL */ `
   subscription OnDeleteBookContent {
     onDeleteBookContent {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt

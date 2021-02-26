@@ -36,6 +36,8 @@ export const getBookContent = /* GraphQL */ `
   query GetBookContent($id: ID!) {
     getBookContent(id: $id) {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt
@@ -51,6 +53,8 @@ export const listBookContents = /* GraphQL */ `
     listBookContents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        bookTitle
+        bookShortName
         bookContent
         createdAt
         updatedAt

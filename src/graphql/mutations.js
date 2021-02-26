@@ -53,6 +53,8 @@ export const createBookContent = /* GraphQL */ `
   ) {
     createBookContent(input: $input, condition: $condition) {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt
@@ -66,6 +68,8 @@ export const updateBookContent = /* GraphQL */ `
   ) {
     updateBookContent(input: $input, condition: $condition) {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt
@@ -79,6 +83,8 @@ export const deleteBookContent = /* GraphQL */ `
   ) {
     deleteBookContent(input: $input, condition: $condition) {
       id
+      bookTitle
+      bookShortName
       bookContent
       createdAt
       updatedAt

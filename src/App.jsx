@@ -11,6 +11,18 @@ function App() {
 
   const toggleShowResults = ()=>setShowResults(!showResults);
 
+  let searchResults = [];
+
+  const searchForBooks = async (bookList)=>{
+    getSearchResults(bookList)
+    .then(content=>{
+      // console.log(content);
+      console.log("App got:", content[0].data.getBookContent.bookShortName);
+  });
+    // console.log(searchResults);
+    setShowResults(true);
+  }
+
   // ! TODO 2/26/21:
   // Need to implement use effect to query db whenever search button pressed.
   // First just get the text from the db as proof it works.
@@ -27,7 +39,7 @@ function App() {
     <div className="App ui-container">
       {showResults ?
         <SearchResults setShowResults={setShowResults} results={bookSearchResults}/> :
-        <Searchform toggleShowResults={toggleShowResults} />
+        <Searchform searchForBooks={searchForBooks} />
       }
     </div>
   );
