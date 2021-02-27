@@ -4,6 +4,7 @@ import SearchResults from './components/SearchResults';
 import {useState, useEffect} from 'react';
 import {getSearchResults, processResults} from './components/GetSearchResults';
 import TextModal from './components/TextModal';
+import NoResultsModal from './components/NoResultsModal';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [showTextModal, setShowTexTModal] = useState(false);
   const [selectedText, setSelectedText] = useState("");
+  const [showNoResultsModal, setShowNoResultsModal] = useState(false)
 
   function hideTextModal(){
     setShowTexTModal(false);
@@ -34,13 +36,25 @@ function App() {
 
       console.log("App got:", content[0].data.getBookContent.bookShortName);
       // processResults(content, query);
-      setSearchResults(processResults(content, query));
-      setShowResults(true);
+      const resultItems = processResults(content, query);
+      if(resultItems?.matches.length > 0){
+        setSearchResults(resultItems);
+        setShowResults(true);
+      } else {
+        setShowNoResultsModal(true);
+        //show popup modal that says "No results found";
+        setTimeout(()=>{
+          //hide the modal
+          setShowNoResultsModal(false);
+        }, 3000);
+      }
     });
   }
 
   return (
     <div className="App ui-container">
+      {showNoResultsModal && <NoResultsModal />}
+
       {showTextModal && <TextModal selectedText={selectedText} hideTextModal={hideTextModal} />}
 
       {showResults ?

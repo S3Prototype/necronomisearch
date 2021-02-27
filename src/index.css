@@ -144,6 +144,7 @@ label{
   margin-bottom: 10px;
 }
 
+
 .search{
   border: none;
   background: none;
@@ -173,7 +174,7 @@ label{
 .search-results-container{
   width: 100%;
   height: 100%;
-  background-color: black;
+  /* background-color: black; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -220,22 +221,34 @@ label{
   min-width: 100%;
   background: none;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-title{
+  margin-top: 10px;
+  min-width: 100%;
+  text-align: center;
+  font-family: 'Astaroth';
+  font-size: var(--placeholder-text-size);
 }
 
 .text-result{
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
+  min-height: 30%;
   max-height: 30%;
-  background: rgba(255, 247, 243, 1);
   color: rgb(27, 21, 1);
-  border-radius: 15px;
   padding: 10px;
   margin-left: 15px;
   margin-right: 15px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  text-align: justify;
   overflow-y: hidden;
+  box-shadow: 1px 1px 1px black;
+  background: url('https://res.cloudinary.com/diujqlncs/image/upload/v1614460708/rotated_paper_xzteyt.png') no-repeat center center fixed; 
 }
 
 .text-modal{
@@ -262,7 +275,7 @@ label{
 
 .selected-text{
   z-index: 52;
-  background-color: rgba(255, 247, 243, 1);
+  background: url('https://res.cloudinary.com/diujqlncs/image/upload/v1614459631/d7395358fcd0b0c671bd0ae05b5ba5eb_ubdxvq.jpg') no-repeat center center fixed; 
   color: black;
   min-height: 80%;
   max-height: 80%;
@@ -270,6 +283,71 @@ label{
   min-width: 90%;
   padding: 30px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  row-gap: 20px;
+}
+
+.back-to-results-button{
+  background: none;
+  border: none;
+  font-family: 'Astaroth';
+  font-size: var(--placeholder-text-size);
+}
+
+.raw-selected-text{
+  text-align: justify;
+  text-indent: 30px;
+}
+
+.query-text{
+  color: red;
+}
+
+.aws-amplify{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: 'Astaroth';
+  font-size: var(--placeholder-text-size);
+  height: 100%;
+  min-width: 100%;
+}
+
+.no-results-modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  background-color: rgba(10, 0, 10, 0.8);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 20%;
+  max-height: 20%;
+  
+}
+
+.no-results-text{
+  text-align: center;
+  color: white;
+  font-family: 'Astaroth';
+  font-size: var(--placeholder-text-size);
+}
+
+.show {
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+  pointer-events:none;
 }
 
 @media (min-width: 1100px){

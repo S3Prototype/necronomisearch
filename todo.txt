@@ -15,7 +15,6 @@ TODO:
 * Use a linter to clean up code.
 * If you have time, make it an accessible API that anyone can hit, and create an NPM package.
 
-
 DONE:
 
 ===

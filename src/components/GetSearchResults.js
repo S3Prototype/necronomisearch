@@ -1,3 +1,4 @@
+import { inputLabel } from 'aws-amplify';
 import Fuse from 'fuse.js';
 // import Amplify, {API, graphqlOperation} from 'aws-amplify';
 // import awsconfig from '../aws-exports';
@@ -33,23 +34,29 @@ function findQueryInBook(content, query){
     const rawTextChunks = [];
     let maxChunkLength = 900;
     let maxSearchLength = maxChunkLength;
-    console.log(content.length);
-
+    let maxResults = 30;
+    // console.log("What we got to work with:",content);
     let endReached = false;
-    for(let i = 0; i < content.length && !endReached; i += maxChunkLength){
+    for(let i = 0; i < content.length && !endReached && rawTextChunks.length <= maxResults; i += maxChunkLength){
         if(i + maxChunkLength >= content.length){
             //Then maxChunkLength should bring us
             //to the last index of content
             maxChunkLength = content.length - i - 1;
             endReached = true;
         }
-        rawTextChunks.push({text: "..."+content.substr(i, maxChunkLength)+"..."})
+        let contentRange = content.substr(i, maxChunkLength);
+        //     //strip out excess edges of <br/> tags that got cut off.
+        // if(contentRange.indexOf('>') >= 0) contentRange = contentRange.slice(contentRange.indexOf('>')+1);
+        // // console.log("contentRange after slice", contentRange);
+        // if(contentRange.indexOf('<') >= 0) contentRange = contentRange.slice(0, contentRange.indexOf('<')-1);
+        // // console.log("contentRange after 2nd slice", contentRange);
+        rawTextChunks.push({text: "..."+contentRange+"..."})
     }
 
     const options = {
         isCaseSensitive: false,
         includeScore: true,
-        shouldSort: false,
+        shouldSort: true,
         includeMatches: true,
         findAllMatches: true,
         minMatchCharLength: query.length,
@@ -64,12 +71,38 @@ function findQueryInBook(content, query){
         ]
       };
       
-      const fuse = new Fuse(rawTextChunks, options);
+    const fuse = new Fuse(rawTextChunks, options);
 
-      const result = fuse.search(query);
+    let results = fuse.search(query);
+
+    results = results.map(result=>{
+        result.matches = result.matches.map(match=>{
+            let text = match.value;
+            const openSpan = "<span class='query-text'>";
+            const closeSpan = "</span>";
+            match.indices.forEach((index, i)=>{
+                const addedLength = openSpan.length*i + closeSpan.length*i;
+                const openLocation = index[0] + addedLength;
+                text = [
+                    text.slice(0, openLocation), openSpan, text.slice(openLocation)
+                ].join('');
+                const closeLocation = index[1] + addedLength + openSpan.length + 1;
+                text = [
+                    text.slice(0, closeLocation), closeSpan, text.slice(closeLocation)
+                ].join('');
+                match.value = text;
+            })
+            return match;
+        })
+        return result;
+    });
+
+    console.log("Our results", results);
+
+    const finalResult = results.map(result=>result.matches.map(match=>match.value));
       
-      console.log("Search results!", result);
-      return result;
+    console.log("Search results!", finalResult);
+    return finalResult;
 }
 
 function processResults(results, query){
