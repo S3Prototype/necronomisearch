@@ -2,43 +2,49 @@ import './index.css';
 import Searchform from './components/Searchform';
 import SearchResults from './components/SearchResults';
 import {useState, useEffect} from 'react';
-import {getSearchResults} from './utils/GetSearchResults';
+import {getSearchResults, processResults} from './components/GetSearchResults';
+import TextModal from './components/TextModal';
 
 function App() {
 
   const [showResults, setShowResults] = useState(false);
-  let bookSearchResults = [];
+  const [searchResults, setSearchResults] = useState([]);
+  const [showTextModal, setShowTexTModal] = useState(false);
+  const [selectedText, setSelectedText] = useState("");
 
-  const toggleShowResults = ()=>setShowResults(!showResults);
-
-  let searchResults = [];
-
-  const searchForBooks = async (bookList)=>{
-    getSearchResults(bookList)
-    .then(content=>{
-      // console.log(content);
-      console.log("App got:", content[0].data.getBookContent.bookShortName);
-  });
-    // console.log(searchResults);
-    setShowResults(true);
+  function hideTextModal(){
+    setShowTexTModal(false);
   }
 
-  // ! TODO 2/26/21:
-  // Need to implement use effect to query db whenever search button pressed.
-  // First just get the text from the db as proof it works.
+  function revealTextModal(text){
+    setSelectedText(text)
+    setShowTexTModal(true);
+  }
 
-  //Put code here to toggle search results window.
-  //pass the usestate function down to searchform
-  //it should trigger usestate when a user clicks search.
-  //and then it should toggle the results window off when the user
-  //clicks a button in the search window or presses back on their phone.
+  function searchForBooks(bookList, query){
+    /*Should probably not return promise here.
+    In GetSearchResults.js, we should probably
+    be taking the promise from getSearchResults and then
+    calling processResults as an async function.
+    Only when it's all resolved should we then show results.
+    But before calling all that code, show a popup modal with
+    a loading icon. Prefer a gif over a css load spinner*/
+    getSearchResults(bookList)
+    .then(content=>{
 
-  // * That use state stuff will be called after search results are gotten.
+      console.log("App got:", content[0].data.getBookContent.bookShortName);
+      // processResults(content, query);
+      setSearchResults(processResults(content, query));
+      setShowResults(true);
+    });
+  }
 
   return (
     <div className="App ui-container">
+      {showTextModal && <TextModal selectedText={selectedText} hideTextModal={hideTextModal} />}
+
       {showResults ?
-        <SearchResults setShowResults={setShowResults} results={bookSearchResults}/> :
+        <SearchResults revealTextModal={revealTextModal} setShowResults={setShowResults} setSelectedText={setSelectedText} results={searchResults}/> :
         <Searchform searchForBooks={searchForBooks} />
       }
     </div>

@@ -5,6 +5,7 @@ import {useState, useEffect} from 'react'
 const Searchform = (props) => {
 
     const [chosenBooks, setChosenBooks] = useState([]);
+    const [bookQuery, setBookQuery] = useState("");
 
     let toggleChosenBooks = (bookID) =>{  
         console.log("CHOSEN AT START:", chosenBooks);
@@ -23,8 +24,8 @@ const Searchform = (props) => {
     //     getSearchResults(chosenBooks);
     // }
 
-    const submitSearch = ()=>{
-        props.searchForBooks(chosenBooks);
+    const submitSearch = (bookQuery)=>{
+        props.searchForBooks(chosenBooks, bookQuery);
     }
 
     //Create a function here that toggles if a value is in an array

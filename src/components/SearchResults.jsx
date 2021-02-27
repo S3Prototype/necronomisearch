@@ -1,6 +1,8 @@
 import React from 'react'
+import BookResult from './BookResult'
 
 function SearchResults(props) {
+    console.log("SearchResult Component goT:", props.results[0]);
     return (
         <div className="search-results-container ui-container">            
             <div className="search-menu">
@@ -8,7 +10,7 @@ function SearchResults(props) {
                 <button className="search-again search-menu-item">Search Again</button>
             </div>
             <div className="results">
-                {props.results.map(result=><div className="result">result</div>)}
+                {props.results.map((result)=><BookResult revealTextModal={props.revealTextModal} title={result.title} matches={result.matches}/>)}
             </div>
         </div>
     )
