@@ -48,7 +48,7 @@ const SearchChecklist = (props) => {
             <ul className="booklist">
                 {books.map(book=>{
                     return <li>
-                        <input className="bookCheckBox" onClick={()=>props.toggleChosenBooks(book.bookContentID)} ref={inputRef} type="checkbox" value={book.bookContentID} name={book.bookShortName} />                        
+                        <input className="book-checkbox" onClick={()=>props.toggleChosenBooks(book.bookContentID)} ref={inputRef} type="checkbox" value={book.bookContentID} name={book.bookShortName} />                        
                         <label for={book.bookShortName}>{book.bookTitle}</label>
                     </li>
                 })}
