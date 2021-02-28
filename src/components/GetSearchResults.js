@@ -1,9 +1,9 @@
-import { inputLabel } from 'aws-amplify';
+// import { inputLabel } from 'aws-amplify';
 import Fuse from 'fuse.js';
 const Amplify = require('aws-amplify');
 const {API, graphqlOperation} = Amplify;
-const awsconfig = require('../aws-exports');
-const { getBookContent } = require('../graphql/queries');
+// const awsconfig = require('../aws-exports');
+// const { getBookContent } = require('../graphql/queries');
 const queries = require('../graphql/queries');
 
 async function queryBook(book){

@@ -1,7 +1,7 @@
 import './index.css';
 import Searchform from './components/Searchform';
 import SearchResults from './components/SearchResults';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {getSearchResults, processResults} from './components/GetSearchResults';
 import TextModal from './components/TextModal';
 import NoResultsModal from './components/NoResultsModal';

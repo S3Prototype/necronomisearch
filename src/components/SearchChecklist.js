@@ -29,17 +29,17 @@ const SearchChecklist = (props) => {
     // function addToChosenBooks()
 
     const inputRef = useRef(null)
-    function testFunc(){
-        props.toggleBook(inputRef.current.value);
-        console.log(inputRef.current.name);
-    }
+    // function testFunc(){
+    //     props.toggleBook(inputRef.current.value);
+    //     console.log(inputRef.current.name);
+    // }
 
     return (
         <div className="books">
             <ul className="booklist">
                 {books.map(book=>{
                     return <li>
-                        <input className="bookCheckBox" onClick={()=>props.toggleChosenBooks(book.bookContentID)} ref={inputRef} className="checkbox" type="checkbox" value={book.bookContentID} name={book.bookShortName} />                        
+                        <input className="bookCheckBox" onClick={()=>props.toggleChosenBooks(book.bookContentID)} ref={inputRef} type="checkbox" value={book.bookContentID} name={book.bookShortName} />                        
                         <label for={book.bookShortName}>{book.bookTitle}</label>
                     </li>
                 })}

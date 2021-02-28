@@ -1,11 +1,11 @@
 import React from 'react'
 import SearchInput from './SearchInput'
 import SearchChecklist from './SearchChecklist'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 const Searchform = (props) => {
 
     const [chosenBooks, setChosenBooks] = useState([]);
-    const [bookQuery, setBookQuery] = useState("");
+    // const [bookQuery, setBookQuery] = useState("");
 
     let toggleChosenBooks = (bookID) =>{  
         console.log("CHOSEN AT START:", chosenBooks);
