@@ -1,17 +1,21 @@
 DOING:
+* Put a "Powered by AWS Amplify" text at the bottom of the search results page.
+* Put a "Back" button in these boxes for backing out.
+* Style search results.
+* Save previous 3 searches on the client. No need to ping server if it's been searched already. This is not data that will likely update.
 
 =====
 
+text formatting tools:
 https://www.gillmeister-software.com/online-tools/text/remove-line-breaks.aspx
 
 https://www.textfixer.com/tools/add-line-breaks.php
 
+But I eventually used sublime text 3's regex feature.
+
 TODO:
-* Put a "Powered by AWS Amplify" text at the bottom of the search results page.
-* Put a "Back" button in these boxes for backing out.
-* Style search results.
+* link the Powered by AWS Amplify text to your case study of this project when it's done.
 * Save searches to redis cache for fast recovery.
-* Save previous 3 searches on the client. No need to ping server if it's been searched already. This is not data that will likely update.
 * Use a linter to clean up code.
 * If you have time, make it an accessible API that anyone can hit, and create an NPM package.
 

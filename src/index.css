@@ -148,7 +148,9 @@ label{
 .search{
   border: none;
   background: none;
-  font-size: var(--placeholder-text-size);
+  font-family: inherit;
+  text-align: center;
+  font-size: var(--base-text-size);
   max-width: 60%;
   border-bottom: 1px solid white;
   color: white;
