@@ -33,12 +33,22 @@
 }
 
 
-html { 
+/* html { 
   background: url('https://res.cloudinary.com/diujqlncs/image/upload/v1614124762/cthulhu_jchsmb.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+} */
+
+body {
+  background: url('https://res.cloudinary.com/diujqlncs/image/upload/v1614124762/cthulhu_jchsmb.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 #root{
