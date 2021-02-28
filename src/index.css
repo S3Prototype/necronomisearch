@@ -302,6 +302,7 @@ label{
 .raw-selected-text{
   text-align: justify;
   text-indent: 30px;
+  max-width: 600px
 }
 
 .query-text{

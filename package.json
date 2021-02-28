@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.2",
     "aws-amplify": "^3.3.20",
+    "dotenv": "^8.2.0",
     "fuse.js": "^6.4.6",
     "install": "^0.13.0",
     "minisearch": "^3.0.2",
@@ -20,10 +21,11 @@
     "react-dom": "^17.0.1",
     "react-html-parser": "^2.0.2",
     "react-scripts": "4.0.3",
+    "serve": "^11.3.2",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start -r dotenv/config",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

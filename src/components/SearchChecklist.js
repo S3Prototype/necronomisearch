@@ -1,14 +1,23 @@
 import React from 'react'
 import '../index.css';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import awsconfig from '../aws-exports';
+// import awsconfig from '../aws-exports.js';
 // import {AmplifySignOut, withAuthetnicator} from '../aws-amplify/ui-react';
 import {listBooks} from '../graphql/queries';
 import {useState, useEffect, useRef} from 'react';
 
+const awsconfig = {
+    "aws_project_region": process.env.REACT_APP_PROJECT_REGION,
+    "aws_appsync_graphqlEndpoint": process.env.REACT_APP_APPSYNC_GRAPHQLENDPOINT,
+    "aws_appsync_region": process.env.REACT_APP_APPSYNC_REGION,
+    "aws_appsync_authenticationType": process.env.REACT_APP_APPSYNC_AUTHENTICATIONTYPE,
+    "aws_appsync_apiKey": process.env.REACT_APP_APPSYNC_APIKEY
+};
+
 Amplify.configure(awsconfig);
 
 const SearchChecklist = (props) => {
+    console.log(process.env);
     const [books, setBooks] = useState([]);
 
     useEffect(()=>{
