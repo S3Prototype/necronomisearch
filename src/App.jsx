@@ -72,7 +72,7 @@ function App() {
       console.log("App got:", content[0].data.getBookContent.bookShortName);
       // processResults(content, query);
       const resultItems = processResults(content, query);
-      if(resultItems.length > 0 && resultItems[0].matches?.length > 0){        
+      if(resultItems.length > 0 && resultItems.some(res=>res.matches?.length > 0)){        
         activateSearchResults(resultItems);
         storeSearch({bookList, query, resultItems});
         return;
@@ -98,8 +98,9 @@ function App() {
 
       {showTextModal && <TextModal selectedText={selectedText} hideTextModal={hideTextModal} />}
 
-      {showResults ?
-        <SearchResults revealTextModal={revealTextModal} setShowResults={setShowResults} setSelectedText={setSelectedText} results={searchResults}/> :
+      {showResults &&!showTextModal ?
+        <SearchResults revealTextModal={revealTextModal} setShowResults={setShowResults} setSelectedText={setSelectedText} results={searchResults}/>
+          :
         <Searchform searchForBooks={searchForBooks} />
       }
     </div>

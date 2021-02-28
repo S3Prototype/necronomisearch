@@ -7,12 +7,14 @@ function BookResult(props) {
     return (
         <>
             <span key={generateKey()} className="book-title">{props.title}</span>
-            {props.matches.map(match=>
+            {props.matches.length > 0 ? props.matches.map(match=>
                 <div
                     onClick={()=>{props.revealTextModal(match)}}
-                    key={generateKey()} className="text-result show">
+                    key={generateKey()} className="text-result show">                        
                         <p>{ReactHtmlParser(match)}</p>
                 </div>)
+                :
+                <p className="nothing-found-result">No Results Found</p>
             }
         </>
     )

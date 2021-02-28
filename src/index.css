@@ -57,6 +57,7 @@ a {
 }
 
 .App{
+  display: flex;
   min-width: 90%;
   max-width: 90%;
   /* max-height: 90%; */
@@ -236,6 +237,11 @@ label{
   font-size: var(--placeholder-text-size);
 }
 
+.nothing-found-result{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .text-result{
   display: flex;
   flex-direction: column;
@@ -254,25 +260,26 @@ label{
 }
 
 .text-modal{
-  position: fixed;
+  /* position: fixed; */
   z-index: 50;
   top: 0;
   left: 0;
   min-width: 100%;
-  min-height: 100%;
-  background-color: rgba(10, 0, 10, 0.4);
+  min-height: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .text-modal-background{
-  position: fixed;
-  z-index: 51;
+  display: none;
+  /* position: fixed; */
+  z-index: 50;
   top: 0;
   left: 0;
   min-width: 100%;
   min-height: 100%;
+  background-color: rgba(10, 0, 10, 0.4);
 }
 
 .selected-text{
@@ -284,7 +291,7 @@ label{
   max-width: 90%;
   min-width: 90%;
   padding: 30px;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -302,7 +309,7 @@ label{
 .raw-selected-text{
   text-align: justify;
   text-indent: 30px;
-  max-width: 600px
+  max-width: 60vw;
 }
 
 .query-text{
@@ -352,7 +359,6 @@ label{
   opacity: 0;
   pointer-events:none;
 }
-
 
 @media (min-width: 1100px){
   .booklist{
