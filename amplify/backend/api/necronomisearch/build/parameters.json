@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "necronomisearch",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-necronomisearch-work-144654-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/bb7cee39ad76ba848b874fca45373f42485ae908"
+}

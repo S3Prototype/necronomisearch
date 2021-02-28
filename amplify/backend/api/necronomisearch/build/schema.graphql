@@ -1,0 +1,217 @@
+type Book {
+  id: ID!
+  bookTitle: String!
+  bookShortName: String!
+  bookContentID: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type BookContent {
+  id: ID!
+  bookTitle: String!
+  bookShortName: String!
+  bookContent: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelBookConnection {
+  items: [Book]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelBookFilterInput {
+  id: ModelIDInput
+  bookTitle: ModelStringInput
+  bookShortName: ModelStringInput
+  bookContentID: ModelStringInput
+  and: [ModelBookFilterInput]
+  or: [ModelBookFilterInput]
+  not: ModelBookFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getBook(id: ID!): Book
+  listBooks(filter: ModelBookFilterInput, limit: Int, nextToken: String): ModelBookConnection
+  getBookContent(id: ID!): BookContent
+  listBookContents(filter: ModelBookContentFilterInput, limit: Int, nextToken: String): ModelBookContentConnection
+}
+
+input CreateBookInput {
+  id: ID
+  bookTitle: String!
+  bookShortName: String!
+  bookContentID: String!
+}
+
+input UpdateBookInput {
+  id: ID!
+  bookTitle: String
+  bookShortName: String
+  bookContentID: String
+}
+
+input DeleteBookInput {
+  id: ID
+}
+
+type Mutation {
+  createBook(input: CreateBookInput!, condition: ModelBookConditionInput): Book
+  updateBook(input: UpdateBookInput!, condition: ModelBookConditionInput): Book
+  deleteBook(input: DeleteBookInput!, condition: ModelBookConditionInput): Book
+  createBookContent(input: CreateBookContentInput!, condition: ModelBookContentConditionInput): BookContent
+  updateBookContent(input: UpdateBookContentInput!, condition: ModelBookContentConditionInput): BookContent
+  deleteBookContent(input: DeleteBookContentInput!, condition: ModelBookContentConditionInput): BookContent
+}
+
+input ModelBookConditionInput {
+  bookTitle: ModelStringInput
+  bookShortName: ModelStringInput
+  bookContentID: ModelStringInput
+  and: [ModelBookConditionInput]
+  or: [ModelBookConditionInput]
+  not: ModelBookConditionInput
+}
+
+type Subscription {
+  onCreateBook: Book @aws_subscribe(mutations: ["createBook"])
+  onUpdateBook: Book @aws_subscribe(mutations: ["updateBook"])
+  onDeleteBook: Book @aws_subscribe(mutations: ["deleteBook"])
+  onCreateBookContent: BookContent @aws_subscribe(mutations: ["createBookContent"])
+  onUpdateBookContent: BookContent @aws_subscribe(mutations: ["updateBookContent"])
+  onDeleteBookContent: BookContent @aws_subscribe(mutations: ["deleteBookContent"])
+}
+
+type ModelBookContentConnection {
+  items: [BookContent]
+  nextToken: String
+}
+
+input ModelBookContentFilterInput {
+  id: ModelIDInput
+  bookTitle: ModelStringInput
+  bookShortName: ModelStringInput
+  bookContent: ModelStringInput
+  and: [ModelBookContentFilterInput]
+  or: [ModelBookContentFilterInput]
+  not: ModelBookContentFilterInput
+}
+
+input CreateBookContentInput {
+  id: ID
+  bookTitle: String!
+  bookShortName: String!
+  bookContent: String!
+}
+
+input UpdateBookContentInput {
+  id: ID!
+  bookTitle: String
+  bookShortName: String
+  bookContent: String
+}
+
+input DeleteBookContentInput {
+  id: ID
+}
+
+input ModelBookContentConditionInput {
+  bookTitle: ModelStringInput
+  bookShortName: ModelStringInput
+  bookContent: ModelStringInput
+  and: [ModelBookContentConditionInput]
+  or: [ModelBookContentConditionInput]
+  not: ModelBookContentConditionInput
+}
