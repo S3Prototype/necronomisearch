@@ -1,13 +1,14 @@
-type Book @model {
+type Book @model @auth(rules: [{allow: public}]) {
   id: ID!
   bookTitle: String!
   bookShortName: String!
   bookContentID: String!
 }
 
-type BookContent @model {
+type BookContent @model @auth(rules: [{allow: public}]) {
   id: ID!
   bookTitle: String!
   bookShortName: String!
   bookContent: String!
 }
+ 

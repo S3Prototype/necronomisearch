@@ -61,12 +61,12 @@ $util.qr($context.args.input.put("__typename", "BookContent"))
 #set( $expAdd = {} )
 #set( $expRemove = [] )
 #if( $modelObjectKey )
-  #set( $keyFields = [] )
+  #set( $keyFields = ["_version", "_deleted", "_lastChangedAt"] )
   #foreach( $entry in $modelObjectKey.entrySet() )
     $util.qr($keyFields.add("$entry.key"))
   #end
 #else
-  #set( $keyFields = ["id"] )
+  #set( $keyFields = ["id", "_version", "_deleted", "_lastChangedAt"] )
 #end
 #foreach( $entry in $util.map.copyAndRemoveAllKeys($context.args.input, $keyFields).entrySet() )
   #if( !$util.isNull($dynamodbNameOverrideMap) && $dynamodbNameOverrideMap.containsKey("$entry.key") )
@@ -128,5 +128,6 @@ $util.qr($update.put("expression", "$expression"))
   }
 } #end,
   "update": $util.toJson($update),
-  "condition": $util.toJson($condition)
+  "condition": $util.toJson($condition),
+  "_version": $util.defaultIfNull($ctx.args.input["_version"], "0")
 }

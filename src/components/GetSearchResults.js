@@ -13,7 +13,7 @@ async function queryBook(book){
 
 
 function getSearchResults(books){
-    console.log("Searching for", books);
+    // console.log("Searching for", books);
     return Promise.all(books.map(book=>queryBook(book)))
     // return returnedContent;
 }
@@ -30,7 +30,7 @@ function findQueryInBook(content, query){
     let maxChunkLength = 900;
     let maxSearchLength = maxChunkLength;
     let maxResults = 30;
-    // console.log("What we got to work with:",content);
+    // // console.log("What we got to work with:",content);
     let endReached = false;
     for(let i = 0; i < content.length && !endReached && rawTextChunks.length <= maxResults; i += maxChunkLength){
         if(i + maxChunkLength >= content.length){
@@ -42,9 +42,9 @@ function findQueryInBook(content, query){
         let contentRange = content.substr(i, maxChunkLength);
         //     //strip out excess edges of <br/> tags that got cut off.
         // if(contentRange.indexOf('>') >= 0) contentRange = contentRange.slice(contentRange.indexOf('>')+1);
-        // // console.log("contentRange after slice", contentRange);
+        // // // console.log("contentRange after slice", contentRange);
         // if(contentRange.indexOf('<') >= 0) contentRange = contentRange.slice(0, contentRange.indexOf('<')-1);
-        // // console.log("contentRange after 2nd slice", contentRange);
+        // // // console.log("contentRange after 2nd slice", contentRange);
         rawTextChunks.push({text: "..."+contentRange+"..."})
     }
 
@@ -92,11 +92,11 @@ function findQueryInBook(content, query){
         return result;
     });
 
-    console.log("Our results", results);
+    // console.log("Our results", results);
 
     const finalResult = results.map(result=>result.matches.map(match=>match.value));
       
-    console.log("Search results!", finalResult);
+    // console.log("Search results!", finalResult);
     return finalResult;
 }
 

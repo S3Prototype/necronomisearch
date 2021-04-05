@@ -8,7 +8,7 @@ const Searchform = (props) => {
     // const [bookQuery, setBookQuery] = useState("");
 
     let toggleChosenBooks = (bookID) =>{  
-        console.log("CHOSEN AT START:", chosenBooks);
+        // console.log("CHOSEN AT START:", chosenBooks);
 
         let tempBooks = chosenBooks;
 
@@ -16,7 +16,7 @@ const Searchform = (props) => {
         tempBooks = tempBooks.filter(currentBook=>currentBook !== bookID);
         if(tempBooks.length === prevLength) tempBooks.push(bookID);
 
-        console.log("Current books:", tempBooks);
+        // console.log("Current books:", tempBooks);
         setChosenBooks(tempBooks);
     }
 

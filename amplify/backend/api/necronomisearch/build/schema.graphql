@@ -1,17 +1,23 @@
-type Book {
+type Book @aws_iam @aws_api_key {
   id: ID!
   bookTitle: String!
   bookShortName: String!
   bookContentID: String!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
 
-type BookContent {
+type BookContent @aws_iam @aws_api_key {
   id: ID!
   bookTitle: String!
   bookShortName: String!
   bookContent: String!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -21,9 +27,10 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelBookConnection {
+type ModelBookConnection @aws_api_key @aws_iam {
   items: [Book]
   nextToken: String
+  startedAt: AWSTimestamp
 }
 
 input ModelStringInput {
@@ -123,10 +130,12 @@ enum ModelAttributeTypes {
 }
 
 type Query {
-  getBook(id: ID!): Book
-  listBooks(filter: ModelBookFilterInput, limit: Int, nextToken: String): ModelBookConnection
-  getBookContent(id: ID!): BookContent
-  listBookContents(filter: ModelBookContentFilterInput, limit: Int, nextToken: String): ModelBookContentConnection
+  getBook(id: ID!): Book @aws_api_key @aws_iam
+  listBooks(filter: ModelBookFilterInput, limit: Int, nextToken: String): ModelBookConnection @aws_api_key @aws_iam
+  syncBooks(filter: ModelBookFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelBookConnection @aws_api_key @aws_iam
+  getBookContent(id: ID!): BookContent @aws_api_key @aws_iam
+  listBookContents(filter: ModelBookContentFilterInput, limit: Int, nextToken: String): ModelBookContentConnection @aws_api_key @aws_iam
+  syncBookContents(filter: ModelBookContentFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelBookContentConnection @aws_api_key @aws_iam
 }
 
 input CreateBookInput {
@@ -134,6 +143,7 @@ input CreateBookInput {
   bookTitle: String!
   bookShortName: String!
   bookContentID: String!
+  _version: Int
 }
 
 input UpdateBookInput {
@@ -141,19 +151,21 @@ input UpdateBookInput {
   bookTitle: String
   bookShortName: String
   bookContentID: String
+  _version: Int
 }
 
 input DeleteBookInput {
   id: ID
+  _version: Int
 }
 
 type Mutation {
-  createBook(input: CreateBookInput!, condition: ModelBookConditionInput): Book
-  updateBook(input: UpdateBookInput!, condition: ModelBookConditionInput): Book
-  deleteBook(input: DeleteBookInput!, condition: ModelBookConditionInput): Book
-  createBookContent(input: CreateBookContentInput!, condition: ModelBookContentConditionInput): BookContent
-  updateBookContent(input: UpdateBookContentInput!, condition: ModelBookContentConditionInput): BookContent
-  deleteBookContent(input: DeleteBookContentInput!, condition: ModelBookContentConditionInput): BookContent
+  createBook(input: CreateBookInput!, condition: ModelBookConditionInput): Book @aws_api_key @aws_iam
+  updateBook(input: UpdateBookInput!, condition: ModelBookConditionInput): Book @aws_api_key @aws_iam
+  deleteBook(input: DeleteBookInput!, condition: ModelBookConditionInput): Book @aws_api_key @aws_iam
+  createBookContent(input: CreateBookContentInput!, condition: ModelBookContentConditionInput): BookContent @aws_api_key @aws_iam
+  updateBookContent(input: UpdateBookContentInput!, condition: ModelBookContentConditionInput): BookContent @aws_api_key @aws_iam
+  deleteBookContent(input: DeleteBookContentInput!, condition: ModelBookContentConditionInput): BookContent @aws_api_key @aws_iam
 }
 
 input ModelBookConditionInput {
@@ -166,17 +178,18 @@ input ModelBookConditionInput {
 }
 
 type Subscription {
-  onCreateBook: Book @aws_subscribe(mutations: ["createBook"])
-  onUpdateBook: Book @aws_subscribe(mutations: ["updateBook"])
-  onDeleteBook: Book @aws_subscribe(mutations: ["deleteBook"])
-  onCreateBookContent: BookContent @aws_subscribe(mutations: ["createBookContent"])
-  onUpdateBookContent: BookContent @aws_subscribe(mutations: ["updateBookContent"])
-  onDeleteBookContent: BookContent @aws_subscribe(mutations: ["deleteBookContent"])
+  onCreateBook: Book @aws_subscribe(mutations: ["createBook"]) @aws_api_key @aws_iam
+  onUpdateBook: Book @aws_subscribe(mutations: ["updateBook"]) @aws_api_key @aws_iam
+  onDeleteBook: Book @aws_subscribe(mutations: ["deleteBook"]) @aws_api_key @aws_iam
+  onCreateBookContent: BookContent @aws_subscribe(mutations: ["createBookContent"]) @aws_api_key @aws_iam
+  onUpdateBookContent: BookContent @aws_subscribe(mutations: ["updateBookContent"]) @aws_api_key @aws_iam
+  onDeleteBookContent: BookContent @aws_subscribe(mutations: ["deleteBookContent"]) @aws_api_key @aws_iam
 }
 
-type ModelBookContentConnection {
+type ModelBookContentConnection @aws_api_key @aws_iam {
   items: [BookContent]
   nextToken: String
+  startedAt: AWSTimestamp
 }
 
 input ModelBookContentFilterInput {
@@ -194,6 +207,7 @@ input CreateBookContentInput {
   bookTitle: String!
   bookShortName: String!
   bookContent: String!
+  _version: Int
 }
 
 input UpdateBookContentInput {
@@ -201,10 +215,12 @@ input UpdateBookContentInput {
   bookTitle: String
   bookShortName: String
   bookContent: String
+  _version: Int
 }
 
 input DeleteBookContentInput {
   id: ID
+  _version: Int
 }
 
 input ModelBookContentConditionInput {

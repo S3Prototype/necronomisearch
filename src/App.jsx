@@ -34,7 +34,7 @@ function App() {
     // tempStoredSearch[storeIndex] = search;
     storedSearches[storeIndex] = search;
     setStoredSearches(storedSearches);
-    console.log("Stored search! ", storedSearches[storeIndex]);
+    // // console.log("Stored search! ", storedSearches[storeIndex]);
   }
 
   function activateSearchResults(resultItems){
@@ -62,14 +62,14 @@ function App() {
       //If we've already searched this exact thing, don't ping the DB.
     const alreadyStoredSearch = getExistingSearch(bookList, query);
     if(alreadyStoredSearch){
-      console.log("Using already stored search!");
+      // // console.log("Using already stored search!");
       activateSearchResults(alreadyStoredSearch.resultItems);
       return;
     }
 
     getSearchResults(bookList)
     .then(content=>{
-      console.log("App got:", content[0].data.getBookContent.bookShortName);
+      ("App got:", content[0].data.getBookContent.bookShortName);
       // processResults(content, query);
       const resultItems = processResults(content, query);
       if(resultItems.length > 0 && resultItems.some(res=>res.matches?.length > 0)){        

@@ -78,6 +78,72 @@
         }
     },
     "Resources": {
+        "DataStore": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "TableName": {
+                    "Fn::If": [
+                        "HasEnvironmentParameter",
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "AmplifyDataStore",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    },
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    "AmplifyDataStore",
+                                    {
+                                        "Fn::GetAtt": [
+                                            "GraphQLAPI",
+                                            "ApiId"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "ds_pk",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "ds_sk",
+                        "AttributeType": "S"
+                    }
+                ],
+                "KeySchema": [
+                    {
+                        "AttributeName": "ds_pk",
+                        "KeyType": "HASH"
+                    },
+                    {
+                        "AttributeName": "ds_sk",
+                        "KeyType": "RANGE"
+                    }
+                ],
+                "BillingMode": "PAY_PER_REQUEST",
+                "TimeToLiveSpecification": {
+                    "AttributeName": "_ttl",
+                    "Enabled": true
+                }
+            }
+        },
         "GraphQLAPI": {
             "Type": "AWS::AppSync::GraphQLApi",
             "Properties": {
@@ -102,7 +168,12 @@
                         }
                     ]
                 },
-                "AuthenticationType": "API_KEY"
+                "AuthenticationType": "API_KEY",
+                "AdditionalAuthenticationProviders": [
+                    {
+                        "AuthenticationType": "AWS_IAM"
+                    }
+                ]
             }
         },
         "GraphQLAPIKey": {
@@ -114,18 +185,31 @@
                         "ApiId"
                     ]
                 },
-                "Description": "Necronomisearch API",
+                "Description": "api key description",
                 "Expires": {
                     "Fn::If": [
                         "APIKeyExpirationEpochIsPositive",
                         {
                             "Ref": "APIKeyExpirationEpoch"
                         },
-                        1615584200
+                        1617072239
                     ]
                 }
             },
             "Condition": "ShouldCreateAPIKey"
+        },
+        "NoneDataSource": {
+            "Type": "AWS::AppSync::DataSource",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Name": "NONE",
+                "Type": "NONE"
+            }
         },
         "GraphQLSchema": {
             "Type": "AWS::AppSync::GraphQLSchema",
@@ -222,7 +306,8 @@
                 }
             },
             "DependsOn": [
-                "GraphQLSchema"
+                "GraphQLSchema",
+                "NoneDataSource"
             ]
         },
         "BookContent": {
@@ -296,7 +381,8 @@
                 }
             },
             "DependsOn": [
-                "GraphQLSchema"
+                "GraphQLSchema",
+                "NoneDataSource"
             ]
         },
         "CustomResourcesjson": {

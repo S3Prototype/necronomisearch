@@ -17,7 +17,7 @@ const awsconfig = {
 Amplify.configure(awsconfig);
 
 const SearchChecklist = (props) => {
-    console.log(process.env);
+    // // console.log(process.env);
     const [books, setBooks] = useState([]);
 
     useEffect(()=>{
@@ -28,10 +28,10 @@ const SearchChecklist = (props) => {
         try{
             const bookData = await API.graphql(graphqlOperation(listBooks));
             const bookList = bookData.data.listBooks.items;
-            console.log("Book list: ", bookList);
+            // console.log("Book list: ", bookList);
             setBooks(bookList);
         } catch(error){
-            console.log("Error fetching books from gql api!", error);
+            // console.log("Error fetching books from gql api!", error);
         }
     }
 
@@ -40,7 +40,7 @@ const SearchChecklist = (props) => {
     const inputRef = useRef(null)
     // function testFunc(){
     //     props.toggleBook(inputRef.current.value);
-    //     console.log(inputRef.current.name);
+    //     // console.log(inputRef.current.name);
     // }
 
     return (

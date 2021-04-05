@@ -8,7 +8,7 @@ const SearchInput = (props) => {
     const inputRef = useRef(null)
 
     function search(){
-        // console.log(inputRef.current.value);
+        // // console.log(inputRef.current.value);
         props.submitSearch(inputRef.current.value);
     }
 
