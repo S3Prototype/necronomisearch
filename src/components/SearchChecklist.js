@@ -17,7 +17,7 @@ const awsconfig = {
 Amplify.configure(awsconfig);
 
 const SearchChecklist = (props) => {
-    // // console.log(process.env);
+    // // // console.logs.env);
     const [books, setBooks] = useState([]);
 
     useEffect(()=>{

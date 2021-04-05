@@ -69,7 +69,6 @@ function App() {
 
     getSearchResults(bookList)
     .then(content=>{
-      ("App got:", content[0].data.getBookContent.bookShortName);
       // processResults(content, query);
       const resultItems = processResults(content, query);
       if(resultItems.length > 0 && resultItems.some(res=>res.matches?.length > 0)){        
