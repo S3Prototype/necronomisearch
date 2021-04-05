@@ -20,10 +20,6 @@ const Searchform = (props) => {
         setChosenBooks(tempBooks);
     }
 
-    // let searchForBooks = ()=>{
-    //     getSearchResults(chosenBooks);
-    // }
-
     const submitSearch = (bookQuery)=>{
         props.searchForBooks(chosenBooks, bookQuery);
     }
